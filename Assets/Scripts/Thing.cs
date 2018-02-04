@@ -12,16 +12,12 @@ using UnityEditor;
 [RequireComponent(typeof(BoxCollider))]
 public class Thing : MonoBehaviour
 {
+    /****************
+     *   主体方法   *
+     ****************/
     [Header("【物体组件】")]
     [Tooltip("是否始终对向摄像机")]
     public bool yLookAtCamera;
-
-    private void Reset()
-    {
-        //添加组件时替换材质，修改标签
-        GetComponent<SpriteRenderer>().sharedMaterial = GameObject.FindGameObjectWithTag("GameSystem").GetComponent<GameSystem>().thingSpriteMat;
-        gameObject.layer = LayerMask.NameToLayer("Objects");
-    }
 
     private void Update()
     {
@@ -31,6 +27,35 @@ public class Thing : MonoBehaviour
         }
     }
 
+    ///// <summary>
+    ///// 由子功能组件添加委托功能
+    ///// </summary>
+    //public GameSystem.VoidNVoid onCursorOver;
+
+    /// <summary>
+    /// 光标指向时由外部调用
+    /// </summary>
+    public void OnCursorOver()
+    {
+
+    }
+    /// <summary>
+    /// 光标进入时由外部调用
+    /// </summary>
+    public void OnCursorEnter()
+    {
+
+    }
+    /// <summary>
+    /// 光标移出时由外部调用
+    /// </summary>
+    public void OnCursorExit()
+    {
+
+    }
+    /****************
+     *   测试方法   *
+     ****************/
     [ContextMenu("面对相机")]
     private void LookAtCamera()
     {
@@ -39,10 +64,17 @@ public class Thing : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(delta);
     }
 
+    private void Reset()
+    {
+        //添加组件时替换材质，修改标签
+        GetComponent<SpriteRenderer>().sharedMaterial = GameObject.FindGameObjectWithTag("GameSystem").GetComponent<GameSystem>().thingSpriteMat;
+        gameObject.layer = LayerMask.NameToLayer("Objects");
+    }
+
 #if UNITY_EDITOR
     [Space(10)]
     [Header("标签名称(给自己看着方便的)")]
-    public string text;
+    public string text = "";
     [Range(0.1f, 2)]
     public float size = 1f;
     private static GUIStyle style;
