@@ -101,15 +101,19 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// 眼睛物体
     /// </summary>
-    private Transform eye;
+    public static Transform eye;
     /// <summary>
     /// 光标父物体
     /// </summary>
-    private Transform cursorParent;
+    public static Transform cursorParent;
     /// <summary>
     /// 关联的刚体
     /// </summary>
     private Rigidbody rid;
+    /// <summary>
+    /// 单例
+    /// </summary>
+    public static PlayerController player;
 
     private void Awake()
     {
