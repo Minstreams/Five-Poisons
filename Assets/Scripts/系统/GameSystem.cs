@@ -118,6 +118,7 @@ public class GameSystem : MonoBehaviour
         public Sprite 远处调查;
         public Sprite 近处调查;
         public Sprite 菜单;
+        public Sprite 菜单2;
     }
     /// <summary>
     /// 颜色预设

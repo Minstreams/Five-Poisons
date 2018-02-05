@@ -24,11 +24,13 @@ public abstract class MenuBotton : Botton
 
     public override void OnCursorEnter()
     {
+        GameSystem.ChangeCursorSprite(GameSystem.setting.the光标图标设置.菜单2);
         GetComponent<SpriteRenderer>().sprite = over;
     }
 
     public override void OnCursorExit()
     {
+        GameSystem.ChangeCursorSprite(GameSystem.setting.the光标图标设置.菜单);
         isActive = false;
         GetComponent<SpriteRenderer>().sprite = normal;
     }
@@ -50,4 +52,19 @@ public abstract class MenuBotton : Botton
     /// 按下按钮时调用
     /// </summary>
     public abstract void ClickDown();
+
+    [ContextMenu("面对相机")]
+    private void LookAtCamera()
+    {
+        Vector3 delta = transform.position - Camera.main.transform.position;
+        //delta.y = 0;
+        transform.rotation = Quaternion.LookRotation(delta);
+    }
+    [ContextMenu("y面对相机")]
+    private void yLookAtCamera()
+    {
+        Vector3 delta = transform.position - Camera.main.transform.position;
+        delta.y = 0;
+        transform.rotation = Quaternion.LookRotation(delta);
+    }
 }

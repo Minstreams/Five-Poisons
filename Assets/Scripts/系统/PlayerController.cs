@@ -156,6 +156,7 @@ public class PlayerController : MonoBehaviour
         {
             xOffset = 0;
             yOffset = 0;
+            GameSystem.ChangeCursorSprite(GameSystem.setting.the光标图标设置.默认);
             yield return Playing();
         }
         else
@@ -208,6 +209,7 @@ public class PlayerController : MonoBehaviour
             xOffset = 0;
             rid.velocity = Vector3.zero;
             GameSystem.gameStatus = GameSystem.GameStatus.UpMenu;
+            GameSystem.ChangeCursorSprite(GameSystem.setting.the光标图标设置.菜单);
             yield return UpMenu();
         }
         else if (yOffset < -yRange)
@@ -215,6 +217,7 @@ public class PlayerController : MonoBehaviour
             xOffset = 0;
             rid.velocity = Vector3.zero;
             GameSystem.gameStatus = GameSystem.GameStatus.DownMenu;
+            GameSystem.ChangeCursorSprite(GameSystem.setting.the光标图标设置.菜单);
             yield return DownMenu();
         }
         else
@@ -257,6 +260,7 @@ public class PlayerController : MonoBehaviour
         //状态转换
         if (yOffset < yRange)
         {
+            GameSystem.ChangeCursorSprite(GameSystem.setting.the光标图标设置.默认);
             GameSystem.gameStatus = GameSystem.GameStatus.Playing;
             yield return Playing();
         }
@@ -299,6 +303,7 @@ public class PlayerController : MonoBehaviour
         //状态转换
         if (yOffset > -yRange)
         {
+            GameSystem.ChangeCursorSprite(GameSystem.setting.the光标图标设置.默认);
             GameSystem.gameStatus = GameSystem.GameStatus.Playing;
             yield return Playing();
         }
