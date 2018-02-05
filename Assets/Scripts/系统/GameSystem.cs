@@ -87,12 +87,15 @@ public class GameSystem : MonoBehaviour
     public static bool paused = false;
     public enum GameStatus
     {
-
+        StartMenu,
+        UpMenu,
+        DownMenu,
+        Playing
     }
     /// <summary>
     /// 当前游戏状态
     /// </summary>
-    public static GameStatus gameStatus;
+    public static GameStatus gameStatus = GameStatus.StartMenu;
 
 
 
@@ -159,6 +162,13 @@ public class GameSystem : MonoBehaviour
     /****************
      * 全局静态方法 *
      ****************/
+    /// <summary>
+    /// 开始游戏，给按钮调用
+    /// </summary>
+    public static void GameStart()
+    {
+        gameStatus = GameStatus.Playing;
+    }
     /// <summary>
     /// 暂停
     /// </summary>

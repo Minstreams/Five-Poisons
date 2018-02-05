@@ -373,7 +373,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 833879643}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.15235117, z: 0, w: 0.98832643}
   m_LocalPosition: {x: 2.87, y: 0.99, z: -0.91213274}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -547,7 +547,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1066606047}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.17709596, z: -0, w: 0.98419356}
   m_LocalPosition: {x: -3.63, y: 1.7851381, z: -0.23990679}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -565,6 +565,8 @@ GameObject:
   - component: {fileID: 1083006769}
   - component: {fileID: 1083006770}
   - component: {fileID: 1083006768}
+  - component: {fileID: 1083006772}
+  - component: {fileID: 1083006771}
   m_Layer: 8
   m_Name: New Sprite
   m_TagString: Untagged
@@ -655,6 +657,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.8, y: 1.8, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1083006771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1083006766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b3e7c26a98e0c4285c1c24b1db3cbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  information:
+    "\u6B63\u6587": []
+    "\u9009\u9879": []
+--- !u!114 &1083006772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1083006766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43b4fb3be91ad5e45993931701053a9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  information:
+    subtitles: []
 --- !u!1 &1358543836
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,8 +1043,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   "the\u6309\u952E\u8BBE\u7F6E":
-    "\u4EA4\u4E92": 0
-    "\u4EA4\u8C08": 0
+    "\u4EA4\u4E92": 323
+    "\u4EA4\u8C08": 99
+  "the\u5149\u6807\u56FE\u6807\u8BBE\u7F6E":
+    "\u9ED8\u8BA4": {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+    "\u8FDC\u5904\u8C03\u67E5": {fileID: 10907, guid: 0000000000000000f000000000000000,
+      type: 0}
+    "\u8FD1\u5904\u8C03\u67E5": {fileID: 10905, guid: 0000000000000000f000000000000000,
+      type: 0}
+    "\u83DC\u5355": {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+  "the\u53EF\u89C6\u8DDD\u79BB": 100
+  "the\u989C\u8272\u9884\u8BBE":
+    "\u989C\u82721": {r: 0, g: 0, b: 0, a: 0}
+    "\u989C\u82722": {r: 0, g: 0, b: 0, a: 0}
+    "\u989C\u82723": {r: 0, g: 0, b: 0, a: 0}
   thingSpriteMat: {fileID: 2100000, guid: 2b35b6a526bd7ec42920d6ea2dec836c, type: 2}
 --- !u!4 &2050442693
 Transform:

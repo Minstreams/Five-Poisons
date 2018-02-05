@@ -8,7 +8,7 @@ using UnityEditor;
 /// 游戏物体类
 /// </summary>
 [RequireComponent(typeof(SpriteRenderer))]
-[AddComponentMenu("MyAsset/Thing")]
+[AddComponentMenu("MyAssets/Thing")]
 [RequireComponent(typeof(BoxCollider))]
 public class Thing : Botton
 {
@@ -73,7 +73,7 @@ public class Thing : Botton
 
     public override void Init()
     {
-        //添加组件时替换材质，修改标签
+        //添加组件时替换材质
         GetComponent<SpriteRenderer>().sharedMaterial = GameObject.FindGameObjectWithTag("GameSystem").GetComponent<GameSystem>().thingSpriteMat;
     }
 #if UNITY_EDITOR
