@@ -10,7 +10,7 @@ using UnityEditor;
 [RequireComponent(typeof(SpriteRenderer))]
 [AddComponentMenu("MyAsset/Thing")]
 [RequireComponent(typeof(BoxCollider))]
-public class Thing : MonoBehaviour
+public class Thing : Botton
 {
     /****************
      *   主体方法   *
@@ -27,32 +27,29 @@ public class Thing : MonoBehaviour
         }
     }
 
-    ///// <summary>
-    ///// 由子功能组件添加委托功能
-    ///// </summary>
-    //public GameSystem.VoidNVoid onCursorOver;
-
-    /// <summary>
-    /// 光标指向时由外部调用
-    /// </summary>
-    public void OnCursorOver()
+    public override void OnCursorEnter()
     {
-
+        if (onCursorEnter != null) onCursorEnter();
     }
-    /// <summary>
-    /// 光标进入时由外部调用
-    /// </summary>
-    public void OnCursorEnter()
+    public override void OnCursorOver()
     {
-
+        if (onCursorOver != null) onCursorOver();
     }
-    /// <summary>
-    /// 光标移出时由外部调用
-    /// </summary>
-    public void OnCursorExit()
+    public override void OnCursorExit()
     {
-
+        GameSystem.ChangeCursorSprite(GameSystem.setting.the光标图标设置.默认);
+        if (onCursorExit != null) onCursorExit();
     }
+
+
+    /****************
+     *   委托功能   *
+     ****************/
+    public GameSystem.VoidNVoid onCursorEnter;
+    public GameSystem.VoidNVoid onCursorOver;
+    public GameSystem.VoidNVoid onCursorExit;
+
+
     /****************
      *   测试方法   *
      ****************/
@@ -63,14 +60,22 @@ public class Thing : MonoBehaviour
         delta.y = 0;
         transform.rotation = Quaternion.LookRotation(delta);
     }
+    [ContextMenu("设置基础调查文本")]
+    private void AddBasicInformation()
+    {
+        gameObject.AddComponent<BasicInformation>();
+    }
+    [ContextMenu("设置对话文本")]
+    private void AddDialogInformation()
+    {
+        gameObject.AddComponent<DialogInformation>();
+    }
 
-    private void Reset()
+    public override void Init()
     {
         //添加组件时替换材质，修改标签
         GetComponent<SpriteRenderer>().sharedMaterial = GameObject.FindGameObjectWithTag("GameSystem").GetComponent<GameSystem>().thingSpriteMat;
-        gameObject.layer = LayerMask.NameToLayer("Objects");
     }
-
 #if UNITY_EDITOR
     [Space(10)]
     [Header("标签名称(给自己看着方便的)")]
