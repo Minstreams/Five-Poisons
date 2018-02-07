@@ -45,9 +45,9 @@ public class Thing : Botton
     /****************
      *   委托功能   *
      ****************/
-    public GameSystem.VoidNVoid onCursorEnter;
-    public GameSystem.VoidNVoid onCursorOver;
-    public GameSystem.VoidNVoid onCursorExit;
+    public VoidNVoid onCursorEnter;
+    public VoidNVoid onCursorOver;
+    public VoidNVoid onCursorExit;
 
 
     /****************

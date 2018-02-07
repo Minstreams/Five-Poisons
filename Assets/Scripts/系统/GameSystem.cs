@@ -7,17 +7,11 @@ using UnityEngine;
 /// </summary>
 public class GameSystem : MonoBehaviour
 {
-    /****************
-     * 静态全局变量 *
-     ****************/
+    //【静态全局变量】
     /// <summary>
     /// 游戏系统单例,系统设置
     /// </summary>
     public static GameSystem setting;
-    /// <summary>
-    /// 返回值和参数都为void的delegate类型
-    /// </summary>
-    public delegate void VoidNVoid();
     /// <summary>
     /// 暂停委托变量
     /// </summary>
@@ -78,9 +72,7 @@ public class GameSystem : MonoBehaviour
     }
 
 
-    /****************
-     * 状态监控变量 *
-     ****************/
+    //【状态监控变量】
     /// <summary>
     /// 暂停状态
     /// </summary>
@@ -102,9 +94,7 @@ public class GameSystem : MonoBehaviour
 
 
 
-    /****************
-     * 全局系统设置 *
-     ****************/
+    //【全局系统设置】
     [System.Serializable]
     public struct KeySetting
     {
@@ -144,12 +134,64 @@ public class GameSystem : MonoBehaviour
 
 
 
+    //【子系统实例】
+    [Space(20)]
+    [Header("【子系统实例】")]
+
+    [Tooltip("黑幕系统设置")]
+    [SerializeField]
+    private BlackGroundSystem.Setting blackGroundSystemSetting;
+    private static BlackGroundSystem blackGround;
+    public static BlackGroundSystem blackGroundSystem
+    {
+        get
+        {
+            if (blackGround == null)
+            {
+                blackGround = setting.gameObject.AddComponent<BlackGroundSystem>();
+                blackGround.setting = setting.blackGroundSystemSetting;
+            }
+            return blackGround;
+        }
+    }
+
+    [Tooltip("场景加载系统设置")]
+    [SerializeField]
+    private SceneLoadSystem.Setting sceneLoadSystemSetting;
+    private static SceneLoadSystem sceneLoad;
+    public static SceneLoadSystem sceneLoadSystem
+    {
+        get
+        {
+            if (sceneLoad == null)
+            {
+                sceneLoad = setting.gameObject.AddComponent<SceneLoadSystem>();
+                sceneLoad.setting = setting.sceneLoadSystemSetting;
+            }
+            return sceneLoad;
+        }
+    }
+
+    [Tooltip("声音系统设置")]
+    [SerializeField]
+    private AudioSystem.Setting audioSystemSetting;
+    private static new AudioSystem audio;
+    public static AudioSystem audioSystem
+    {
+        get
+        {
+            if (audio == null)
+            {
+                audio = setting.gameObject.AddComponent<AudioSystem>();
+                audio.setting = setting.audioSystemSetting;
+            }
+            return audio;
+        }
+    }
 
 
 
-    /****************
-     * 全局实例引用 *
-     ****************/
+    //【全局实例引用】
     [Space(10)]
     [Header("【实例引用】")]
     [Tooltip("基础物体的材质实例")]
@@ -158,17 +200,14 @@ public class GameSystem : MonoBehaviour
 
 
 
-
-
-    /****************
-     * 全局静态方法 *
-     ****************/
+    //【全局静态方法】
     /// <summary>
     /// 开始游戏，给按钮调用
     /// </summary>
     public static void GameStart()
     {
         gameStatus = GameStatus.Playing;
+        sceneLoadSystem.LoadScene("Scene1");
     }
     /// <summary>
     /// 暂停
@@ -206,9 +245,7 @@ public class GameSystem : MonoBehaviour
 
 
 
-    /****************
-     * 系统内部实现 *
-     ****************/
+    //【系统内部实现】
 
     //player的光标数据
     private static SpriteRenderer cursorSpriteRenderer;
@@ -237,6 +274,8 @@ public class GameSystem : MonoBehaviour
     {
         //生成光标射线并处理botton 的接收信息
         Physics.Raycast(Camera.main.ScreenPointToRay(eyeCamera.WorldToScreenPoint(cursorParent.position)), out cursorRaycastHit, setting.the可视距离, 1 << LayerMask.NameToLayer("Objects"));
+        Ray temp = Camera.main.ScreenPointToRay(eyeCamera.WorldToScreenPoint(cursorParent.position));
+        Debug.DrawRay(temp.origin, temp.direction);
         Botton newActiveBotton = cursorRaycastHit.collider == null ? null : cursorRaycastHit.collider.GetComponent<Botton>();
         if (newActiveBotton != currentActiveBotton)
         {
@@ -264,6 +303,20 @@ public class GameSystem : MonoBehaviour
                 return the颜色预设.颜色1;
         }
         return Color.black;
+    }
+
+    //【流程控制】
+    private void Start()
+    {
+        StartCoroutine(GameProgress());
+    }
+    /// <summary>
+    /// 游戏进度
+    /// </summary>
+    private IEnumerator GameProgress()
+    {
+        sceneLoadSystem.LoadScene("StartMenu", true);
+        yield return 0;
     }
 }
 
